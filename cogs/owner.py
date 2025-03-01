@@ -1,6 +1,5 @@
 import discord
 import funcs
-import os
 from dotenv import set_key
 from discord.ext import commands
 
@@ -58,7 +57,11 @@ class Owner(commands.Cog): # create a class for our cog that inherits from comma
         isOwner = ctx.author.id == funcs.ownerID
 
         if isOwner:
-            guildName = await self.bot.fetch_guild(int(guild_id)) #Get guild name from guild ID
+            try:
+                guildName=await self.bot.fetch_guild(int(guild_id)) #Get guild name from guild ID
+            except:
+                await ctx.respond("No guild found!", ephemeral=True)
+                
             await funcs.sendWebhook(f"🚨 **Leave** Command executed in '**{ctx.guild.name}**' ID: **{ctx.guild.id}** by **{ctx.author}** ID: **{ctx.author.id}**\nServer left:\n**{guildName}** ID: **{guild_id}**")
             if guildName: #Check if guild name could be fetched. If it couldn't = guild doesn't exist
                 await self.bot.get_guild(guild_id).leave() #Leave guild using ID
