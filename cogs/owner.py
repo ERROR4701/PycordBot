@@ -16,12 +16,18 @@ class Owner(commands.Cog): # create a class for our cog that inherits from comma
         isOwner = ctx.author.id == funcs.ownerID
 
         if isOwner:
-            channel = await self.bot.fetch_channel(int(channel_id))
-            if channel:  # Check if channel exists
+            try:
+                channel = await self.bot.fetch_channel(int(channel_id))
+            except:
+                await ctx.respond("Channel couldn't be found.", ephemeral=True)
+                return
+            
+            try:
                 await channel.send(message)
                 await ctx.respond("Message sent!", ephemeral=True)
-            else:
-                await ctx.respond("Channel not found.", ephemeral=True)
+            except:
+                await ctx.respond("Message couldn't be sent.", ephemeral=True)
+
             set_key(".env", "last_msg_cmd", message)
             await funcs.sendWebhook(f"🚨 **Message** Command executed in '**{ctx.guild.name}**' ID: **{ctx.guild.id}** by **{ctx.author}** ID: **{ctx.author.id}**\nWith the Message:\n'{message}'")
         else:
