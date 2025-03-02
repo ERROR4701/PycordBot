@@ -11,7 +11,7 @@ class Owner(commands.Cog): # create a class for our cog that inherits from comma
 
     ###Message Command###
     @discord.slash_command(name="message")
-    @discord.default_permissions()
+    @discord.command.is_owner()
     async def message(self, ctx, channel_id, message: str):
         isOwner = ctx.author.id == funcs.ownerID
 
@@ -31,7 +31,7 @@ class Owner(commands.Cog): # create a class for our cog that inherits from comma
         
     ###Guilds Command###
     @discord.slash_command(name="guilds")
-    @discord.default_permissions()
+    @discord.command.is_owner()
     async def guilds(self, ctx):
         isOwner = ctx.author.id == funcs.ownerID
 
@@ -52,7 +52,7 @@ class Owner(commands.Cog): # create a class for our cog that inherits from comma
 
     ###Leave Command###
     @discord.slash_command(name="leave")
-    @discord.default_permissions()
+    @discord.command.is_owner()
     async def leave(self, ctx, guild_id):
         isOwner = ctx.author.id == funcs.ownerID
 

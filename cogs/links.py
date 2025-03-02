@@ -18,11 +18,10 @@ class Links(commands.Cog): # create a class for our cog that inherits from comma
         roles = funcs.updateroles()
         usesID = funcs.updateuseid()
         required_role = roles["btRole"]
-
         if usesID:
             hasRole = required_role in [role.id for role in ctx.author.roles]
         else:
-            hasRole = required_role in [role.id for role in ctx.author.roles]
+            hasRole = required_role in [role.name for role in ctx.author.roles]
 
         if hasRole:
             await ctx.respond("Placeholder for the link to parliament once McPolitics is back")
