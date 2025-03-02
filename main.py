@@ -7,7 +7,7 @@ load_dotenv() # load all the variables from the env file
 intents = discord.Intents.default()
 intents.message_content = True  # Enable message content intent
 
-bot = discord.Bot(intents=intents, owner_ids=set(funcs.ownerID))
+bot = discord.Bot(intents=intents, owner_ids=[funcs.ownerID])
 
 if os.getenv("isTest"):
     TOKEN = os.getenv("testTOKEN")
