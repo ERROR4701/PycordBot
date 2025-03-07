@@ -17,7 +17,7 @@ else:
 @bot.event
 async def on_ready():
     print(f"{bot.user} is ready and online!")
-    activity = discord.Activity(type=discord.ActivityType.listening, name="the Order of the Great Diess")
+    activity = discord.Activity(type=discord.ActivityType.listening, name="the Orders of the Great Diess")
     await bot.change_presence(activity=activity)
     await bot.sync_commands()
 
